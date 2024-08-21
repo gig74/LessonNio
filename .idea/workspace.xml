@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2d211df-b931-47fe-8e80-e77bde89d096" name="Changes" comment="01 - base commit">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Test/1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/org/example/nio/GFG.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/org/example/nio/server/MyTestNioClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/org/example/nio/server/StartStopServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/org/example/nio/test/FillingTestFile.java" afterDir="false" />
+    <list default="true" id="e2d211df-b931-47fe-8e80-e77bde89d096" name="Changes" comment="02 - revision one">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/example/nio/DiffWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/DiffWrite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/example/nio/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/EchoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/EchoTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/NIOClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/NIOClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/NIOServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/NIOServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -164,11 +154,19 @@
       <option name="project" value="LOCAL" />
       <updated>1724068159971</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="02 - revision one">
+      <created>1724239885985</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724239885985</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="01 - base commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="01 - base commit" />
+    <MESSAGE value="02 - revision one" />
+    <option name="LAST_COMMIT_MESSAGE" value="02 - revision one" />
   </component>
 </project>

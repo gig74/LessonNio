@@ -11,6 +11,8 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+import static java.util.UUID.randomUUID;
+
 public class NIOServer {
 
     private static final String POISON__PILL = "POISON__PILL";
@@ -67,7 +69,7 @@ public class NIOServer {
             // получаем набор выбранных ключей для обработки
             Set<SelectionKey> selectedKeys = selector.selectedKeys();
             Iterator<SelectionKey> iter = selectedKeys.iterator();
-            SelectionKey key = null ;
+            SelectionKey key = null;
             while (iter.hasNext()) {
                 try {
                     // Чтобы селектор мог отслеживать любые каналы,
@@ -109,9 +111,10 @@ public class NIOServer {
             }
 //        buffer.clear();
 
-//        buffer.flip();
+            buffer.flip();
 //        buffer.clear();
-            buffer2 = ByteBuffer.wrap("My".getBytes());
+//            String in = new String(buffer.array()).trim() ;
+            buffer2 = ByteBuffer.wrap(("My " + new String(buffer.array()).trim() + " " + randomUUID()).getBytes());
 //        buffer2.rewind();
 
             buffer.flip();
