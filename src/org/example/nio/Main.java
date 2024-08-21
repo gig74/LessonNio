@@ -1,4 +1,6 @@
 package org.example.nio;
+import org.example.nio.server.NIOServer;
+
 import java.io.IOException;
 import java.nio.file.*;
 
@@ -8,6 +10,13 @@ import java.nio.file.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
+//        final int OP_ACCEPT = 1 << 4;
+//        System.out.println(OP_ACCEPT);
+        Process server;
+        server = NIOServer.start();
+        server.destroy();
+
         ex1();
         ex2();
         ex3();
@@ -19,12 +28,12 @@ public class Main {
     public static void ex1() {
 
         // Cоздание объекта Path через вызов статического метода get() класса Paths
-        Path testFilePath = Paths.get("ваш путь/1.txt");
+        Path testFilePath = Paths.get("C:\\TEMP\\7\\1.txt");
 
         //Пример строки создания объекта Path пути для запуска в Windows
         //Path testFilePath = Paths.get("...\\testfile.txt");
 
-        //Вывод инормации о файле
+        //Вывод информации о файле
         System.out.println("\t file name: " + testFilePath.getFileName());
         System.out.println("\t root of the path: " + testFilePath.getRoot());
         System.out.println("\t parent of the target: "
@@ -32,7 +41,7 @@ public class Main {
 
         //Вывод элементов пути
         for (Path element : testFilePath) {
-            System.out.println("\t path element: " + element);
+            System.out.println("\t\t path element: " + element);
         }
     }
 
@@ -60,26 +69,29 @@ public class Main {
 
     public static void ex3() {
         //Проверка для файла
-        Path path = Paths.get(".../fileName.txt");
-
-        //Проверка для дериктории
+        Path path = Paths.get(".\\Test\\1.txt");
+        Path testPathNormalized = Paths
+                .get(path.normalize().toString());
+        System.out.println("\tTest File normalized absolute path is : "
+                + testPathNormalized .toAbsolutePath());
+        //Проверка для директории
         //Path path = Paths.get("/home/heorhi/workspace/OCPJP/src/test");
 
         if (Files.exists(path, LinkOption.NOFOLLOW_LINKS)) {
-            System.out.println("The file/directory " + path.getFileName()
+            System.out.println("\tThe file/directory " + path.getFileName()
                     + " exists");
             if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) {
-                System.out.println(path.getFileName() + " is a directory");
+                System.out.println("\t" + path.getFileName() + " is a directory");
             } else {
-                System.out.println(path.getFileName() + " is a file");
+                System.out.println("\t" + path.getFileName() + " is a file");
             }
         } else {
-            System.out.println("The file/directory " + path.getFileName() + " does not exist");
+            System.out.println("\tThe file/directory " + path.getFileName() + " does not exist");
         }
     }
 
     public static void ex4() {
-        Path path = Paths.get("Вставьте сюда путь к какому-либо файлу");
+        Path path = Paths.get("C:\\TEMP\\7\\1.txt");
         try {
             Object object = Files.getAttribute(path, "creationTime");
             System.out.println("Creation time: " + object);

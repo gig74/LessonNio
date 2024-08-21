@@ -23,6 +23,9 @@ public class EchoTest {
     public void givenServerClient__whenServerEchosMessage__thenCorrect() {
         String resp1 = client.sendMessage("hello");
         String resp2 = client.sendMessage("world");
+        String resp3 = client.sendMessage("POISON__PILL");
+        String resp4 = client.sendMessage("POISON__PILL");
+
         assertEquals("hello", resp1);
         assertEquals("world", resp2);
     }

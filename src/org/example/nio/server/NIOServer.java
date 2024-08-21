@@ -20,9 +20,9 @@ public class NIOServer {
     // один поток может использоваться для управления несколькими каналами и,
     // следовательно, несколькими сетевыми подключениями.
 
-    public static void main(String[]args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
-        // Переключение контекста между потоками является дорогостоящим для операционной системы ,
+        // Переключение контекста между потоками является дорогостоящим для операционной системы,
         // каждый поток занимает память.
         //
         // селекторы не просто помогают вам читать данные; они также могут прослушивать входящие
@@ -58,57 +58,82 @@ public class NIOServer {
         // создаем ByteBuffer , с которого сервер будет писать и читать.
 
         ByteBuffer buffer = ByteBuffer.allocate(256);
+        ByteBuffer buffer2 = ByteBuffer.allocate(256);
+
 
         while (true) {
+
             selector.select();
-
             // получаем набор выбранных ключей для обработки
-
             Set<SelectionKey> selectedKeys = selector.selectedKeys();
             Iterator<SelectionKey> iter = selectedKeys.iterator();
+            SelectionKey key = null ;
             while (iter.hasNext()) {
+                try {
+                    // Чтобы селектор мог отслеживать любые каналы,
+                    //мы должны зарегистрировать эти каналы в селекторе.
 
-                // Чтобы селектор мог отслеживать любые каналы,
-                //мы должны зарегистрировать эти каналы в селекторе.
+                    key = iter.next();
 
-                SelectionKey key = iter.next();
+                    // набор событий, которые мы хотим, чтобы селектор наблюдал на этом канале
 
-                // набор событий, которые мы хотим, чтобы селектор наблюдал на этом канале
+                    if (key.isAcceptable()) {
+                        register(selector, serverSocket);
+                    }
 
-                if (key.isAcceptable()) {
-                    register(selector, serverSocket);
+                    if (key.isReadable()) {
+                        answerWithEcho(buffer, key, buffer2);
+                    }
+                    iter.remove();
+                } catch (IOException e) {
+                    System.out.println("Cycle main:whiler");
+                    key.cancel();
+//                    throw e;
                 }
 
-                if (key.isReadable()) {
-                    answerWithEcho(buffer, key);
-                }
-                iter.remove();
             }
         }
     }
 
     // SelectionKey -  объект содержит данные, представляющие регистрацию канала.
 
-    private static void answerWithEcho(ByteBuffer buffer, SelectionKey key)
+    private static void answerWithEcho(ByteBuffer buffer, SelectionKey key, ByteBuffer buffer2)
             throws IOException {
+        try {
+            System.out.println("Process answerWithEcho");
+            SocketChannel client = (SocketChannel) key.channel();
+            client.read(buffer);
+            if (new String(buffer.array()).trim().equals(POISON__PILL)) {
+                client.close();
+                System.out.println("Not accepting client messages anymore");
+            }
+//        buffer.clear();
 
-        SocketChannel client = (SocketChannel) key.channel();
-        client.read(buffer);
-        if (new String(buffer.array()).trim().equals(POISON__PILL)) {
-            client.close();
-            System.out.println("Not accepting client messages anymore");
+//        buffer.flip();
+//        buffer.clear();
+            buffer2 = ByteBuffer.wrap("My".getBytes());
+//        buffer2.rewind();
+
+            buffer.flip();
+            client.write(buffer2);
+            buffer.clear();
+        } catch (IOException e) {
+            System.out.println("Method answerWithEcho");
+            throw e;
         }
 
-        buffer.flip();
-        client.write(buffer);
-        buffer.clear();
     }
 
     private static void register(Selector selector, ServerSocketChannel serverSocket) throws IOException {
+        try {
+            SocketChannel client = serverSocket.accept();
+            client.configureBlocking(false);
+            client.register(selector, SelectionKey.OP_READ);
+        } catch (IOException e) {
+            System.out.println("Method register");
+            throw e;
+        }
 
-        SocketChannel client = serverSocket.accept();
-        client.configureBlocking(false);
-        client.register(selector, SelectionKey.OP_READ);
     }
 
     public static Process start() throws IOException {
@@ -119,6 +144,6 @@ public class NIOServer {
 
         ProcessBuilder builder = new ProcessBuilder(javaBin, "-cp", classpath, className);
 
-        return builder.start();
+        return builder.inheritIO().start();
     }
 }

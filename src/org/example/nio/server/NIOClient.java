@@ -8,13 +8,13 @@ import java.nio.channels.SocketChannel;
 public class NIOClient {
     private static SocketChannel client;
     private static ByteBuffer buffer;
+    private static ByteBuffer buffer_in;
     private static NIOClient instance;
 
     public static NIOClient start() {
         if (instance == null)
             instance = new NIOClient();
-
-        return instance;
+     return instance;
     }
 
     public static void stop() throws IOException {
@@ -26,6 +26,7 @@ public class NIOClient {
         try {
             client = SocketChannel.open(new InetSocketAddress("localhost", 5454));
             buffer = ByteBuffer.allocate(256);
+            buffer_in = ByteBuffer.allocate(256);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,14 +38,14 @@ public class NIOClient {
         try {
             client.write(buffer);
             buffer.clear();
-            client.read(buffer);
-            response = new String(buffer.array()).trim();
+//            buffer = ByteBuffer.wrap("".getBytes());
+            client.read(buffer_in);
+            response = new String(buffer_in.array()).trim();
             System.out.println("response=" + response);
-            buffer.clear();
+            buffer_in.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return response;
-
     }
 }

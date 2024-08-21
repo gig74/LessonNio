@@ -1,9 +1,6 @@
 package org.example.nio;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.channels.FileChannel;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,23 +9,20 @@ public class DiffWrite {
 
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
-
     public static void main(String[] args) throws Exception {
-
-        File in = new File("in.txt");
-        File out = new File("out.txt");
-        copyFile(in, out);
+        File in = new File(".\\Test\\in.txt");
+        File out = new File(".\\Test\\out.txt");
+        System.out.println("copyFileNio");
         copyFileNio(in, out);
+        System.out.println("----------------------");
+        System.out.println("copyFileIo");
+        copyFileIo(in, out);
     }
 
-    public static void copyFile(File in, File out) throws Exception {
-
-
+    public static void copyFileIo(File in, File out) throws Exception {
         System.out.println("Before Read :" + sdf.format(new Date()));
 
-
-        try (FileInputStream fis = new FileInputStream(in);
-             FileOutputStream fos = new FileOutputStream(out);) {
+        try (FileInputStream fis = new FileInputStream(in); FileOutputStream fos = new FileOutputStream(out);) {
             byte[] buf = new byte[1024];
             int i = 0;
             while ((i = fis.read(buf)) != -1) {
@@ -43,15 +37,11 @@ public class DiffWrite {
     }
 
     public static void copyFileNio(File in, File out) throws IOException {
-
         System.out.println("Before Read :" + sdf.format(new Date()));
 
-
-        try (FileChannel inChannel = new FileInputStream(in).getChannel();
-             FileChannel outChannel = new FileOutputStream(out).getChannel();) {
-
+//        try (FileChannel inChannel = new FileInputStream(in).getChannel(); FileChannel outChannel = new FileOutputStream(out).getChannel();) {
+          try (FileChannel inChannel = new RandomAccessFile(in,"r").getChannel(); FileChannel outChannel = new RandomAccessFile(out,"rw").getChannel();) {
             inChannel.transferTo(0, inChannel.size(), outChannel);
-
         } catch (IOException e) {
             throw e;
         }
