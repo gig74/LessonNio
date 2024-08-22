@@ -44,8 +44,8 @@ public class ExchangeConcoleFile {
                 while (buffer.hasRemaining()) {
                     // запишем текст
                     fileChannel.write(buffer);
-                    fileChannel.write(ByteBuffer.wrap(("\n").getBytes()));
                 }
+                fileChannel.write(ByteBuffer.wrap(("\n").getBytes()));
                 //  НЕПРАВИЛЬНО закроем буфер
                 buffer.clear();
             }
