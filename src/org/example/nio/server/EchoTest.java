@@ -1,5 +1,6 @@
 package org.example.nio.server;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,6 +8,7 @@ import org.junit.Test;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class EchoTest {
 
@@ -21,13 +23,19 @@ public class EchoTest {
 
     @Test
     public void givenServerClient__whenServerEchosMessage__thenCorrect() {
-        String resp1 = client.sendMessage("hello");
+        String resp1 = client.sendMessage("halloween");
         String resp2 = client.sendMessage("world");
         String resp3 = client.sendMessage("POISON__PILL");
         String resp4 = client.sendMessage("POISON__PILL");
+        String resp5 = client.sendMessage("hello");
 
-        assertEquals("hello", resp1);
-        assertEquals("world", resp2);
+        assertThat(resp1, CoreMatchers.containsString("halloween"));
+        assertThat(resp2, CoreMatchers.containsString("world"));
+        assertEquals("Not accepting client messages anymore", resp3);
+        assertEquals("", resp4);
+        assertEquals("", resp5);
+//        assertEquals("hello", resp1);
+//        assertEquals("world", resp2);
     }
 
     @After

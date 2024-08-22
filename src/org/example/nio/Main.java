@@ -10,13 +10,6 @@ import java.nio.file.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
-//        final int OP_ACCEPT = 1 << 4;
-//        System.out.println(OP_ACCEPT);
-        Process server;
-        server = NIOServer.start();
-        server.destroy();
-
         ex1();
         ex2();
         ex3();
@@ -49,7 +42,6 @@ public class Main {
         Path testFilePath = Paths.get("./Test");
 
         //Пример строки пути для запуска в Windows
-        //Path testFilePath = Paths.get(".\\Test");
 
         System.out.println("The file name is: " + testFilePath.getFileName());
         System.out.println("It's URI is: " + testFilePath.toUri());

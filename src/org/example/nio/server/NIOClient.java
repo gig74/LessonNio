@@ -5,6 +5,9 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 
+import static java.util.Arrays.fill;
+import static java.util.UUID.randomUUID;
+
 public class NIOClient {
     private static SocketChannel client;
     private static ByteBuffer buffer;
@@ -33,16 +36,16 @@ public class NIOClient {
     }
 
     public String sendMessage(String msg) {
+        System.out.println("Message " + msg);
+        fill(buffer.array(), (byte)0);
+        fill(buffer_in.array(), (byte)0);
         buffer = ByteBuffer.wrap(msg.getBytes());
         String response = null;
         try {
             client.write(buffer);
-            buffer.clear();
-//            buffer = ByteBuffer.wrap("".getBytes());
             client.read(buffer_in);
             response = new String(buffer_in.array()).trim();
             System.out.println("response=" + response);
-            buffer_in.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }

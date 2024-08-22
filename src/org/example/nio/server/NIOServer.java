@@ -11,6 +11,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+import static java.util.Arrays.fill;
 import static java.util.UUID.randomUUID;
 
 public class NIOServer {
@@ -31,12 +32,14 @@ public class NIOServer {
         // сетевые соединения
         // и записывать данные по каналам.
 
-
+//        System.out.println("Create Selector");
         Selector selector = Selector.open();
 
-
+//        System.out.println("Open ServerSocketChannel");
         ServerSocketChannel serverSocket = ServerSocketChannel.open();
+//        System.out.println("bind ServerSocketChannel");
         serverSocket.bind(new InetSocketAddress("localhost", 5454));
+//        System.out.println("configureBlocking ServerSocketChannel");
         serverSocket.configureBlocking(false);
 
 
@@ -88,7 +91,7 @@ public class NIOServer {
                     }
                     iter.remove();
                 } catch (IOException e) {
-                    System.out.println("Cycle main:whiler");
+                    System.out.println("Cycle main:whiler key.cancel()");
                     key.cancel();
 //                    throw e;
                 }
@@ -101,25 +104,20 @@ public class NIOServer {
 
     private static void answerWithEcho(ByteBuffer buffer, SelectionKey key, ByteBuffer buffer2)
             throws IOException {
+        fill(buffer.array(), (byte)0);
+        fill(buffer2.array(), (byte)0);
         try {
             System.out.println("Process answerWithEcho");
             SocketChannel client = (SocketChannel) key.channel();
             client.read(buffer);
             if (new String(buffer.array()).trim().equals(POISON__PILL)) {
+                buffer2 = ByteBuffer.wrap(("Not accepting client messages anymore").getBytes());
+                client.write(buffer2);
                 client.close();
                 System.out.println("Not accepting client messages anymore");
             }
-//        buffer.clear();
-
-            buffer.flip();
-//        buffer.clear();
-//            String in = new String(buffer.array()).trim() ;
             buffer2 = ByteBuffer.wrap(("My " + new String(buffer.array()).trim() + " " + randomUUID()).getBytes());
-//        buffer2.rewind();
-
-            buffer.flip();
             client.write(buffer2);
-            buffer.clear();
         } catch (IOException e) {
             System.out.println("Method answerWithEcho");
             throw e;

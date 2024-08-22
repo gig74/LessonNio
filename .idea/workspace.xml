@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2d211df-b931-47fe-8e80-e77bde89d096" name="Changes" comment="02 - revision one">
+    <list default="true" id="e2d211df-b931-47fe-8e80-e77bde89d096" name="Changes" comment="02 - revision two">
+      <change afterPath="$PROJECT_DIR$/src/org/example/nio/homework/ExchangeConcoleFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/example/nio/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/EchoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/EchoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/MyTestNioClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/MyTestNioClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/NIOClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/NIOClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/NIOServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/NIOServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/org/example/nio/server/StartStopServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/org/example/nio/server/StartStopServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,13 +50,26 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/GulaevIG/IdeaProjects/LessonNio&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.MyTestNioClient">
-    <configuration name="DiffWrite" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.example.nio.DiffWrite" />
+  <component name="RunManager" selected="Application.StartStopServer">
+    <configuration name="ExchangeConcoleFile" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.nio.homework.ExchangeConcoleFile" />
       <module name="LessonNio" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.nio.*" />
+          <option name="PATTERN" value="org.example.nio.homework.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ExchangeConcoleFole" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.example.nio.homework.ExchangeConcoleFole" />
+      <module name="LessonNio" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.nio.homework.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -130,11 +149,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MyTestNioClient" />
         <item itemvalue="Application.StartStopServer" />
+        <item itemvalue="Application.MyTestNioClient" />
+        <item itemvalue="Application.ExchangeConcoleFole" />
         <item itemvalue="JUnit.EchoTest.givenServerClient__whenServerEchosMessage__thenCorrect" />
         <item itemvalue="JUnit.EchoTest" />
-        <item itemvalue="Application.DiffWrite" />
       </list>
     </recent_temporary>
   </component>
@@ -161,12 +180,35 @@
       <option name="project" value="LOCAL" />
       <updated>1724239885985</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="02 - revision two">
+      <created>1724240871639</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1724240871639</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="01 - base commit" />
     <MESSAGE value="02 - revision one" />
-    <option name="LAST_COMMIT_MESSAGE" value="02 - revision one" />
+    <MESSAGE value="02 - revision two" />
+    <option name="LAST_COMMIT_MESSAGE" value="02 - revision two" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.net.ConnectException" package="java.net" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="java.net.ConnectException" memberName="cause" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
