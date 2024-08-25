@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
@@ -17,7 +18,9 @@ public class EchoTest {
 
     @Before
     public void setup() throws IOException, InterruptedException {
+        System.out.println("Пуск");
         server = NIOServer.start();
+        TimeUnit.SECONDS.sleep(1); // БЕЗ ЗАДЕРЖКИ НА МОЁМ ОЧЕНЬ ШУСТРОМ КОМПЕ НЕ РАБОТАЕТ
         client = NIOClient.start();
     }
 
